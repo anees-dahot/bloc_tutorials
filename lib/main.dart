@@ -1,8 +1,8 @@
-import 'package:bloc_practice/counter%20app/cubit/counter_cubit.dart';
+import 'package:bloc_practice/counter%20app/logic/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'counter app/counter_screen.dart';
+import 'counter app/presentation/screens/counter_screen.dart';
 
 void main() {
   runApp(const MyApp());

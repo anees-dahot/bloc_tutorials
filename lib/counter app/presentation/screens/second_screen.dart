@@ -1,16 +1,16 @@
-import 'package:bloc_practice/counter%20app/cubit/counter_cubit.dart';
+import 'package:bloc_practice/counter%20app/logic/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class SecondScreen extends StatefulWidget {
+  const SecondScreen({super.key, required this.title});
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SecondScreen> createState() => _SecondScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SecondScreenState extends State<SecondScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
