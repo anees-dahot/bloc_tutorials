@@ -66,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
+                heroTag: 'screen1Fab',
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).increment();
                   },
@@ -73,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: const Icon(Icons.add),
                 ),
                 FloatingActionButton(
+                  heroTag: 'screen1Fab2',
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).decrement();
                   },

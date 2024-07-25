@@ -23,28 +23,30 @@ class _SecondScreenState extends State<SecondScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             BlocConsumer<CounterCubit, CounterState>(
-             listener: (context, state) {
-         if(state.wasIncremented == true){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text( 'Counter value inremented'), duration: Duration(microseconds: 100)));
-         }
-         else{
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content:Text( 'Counter value decremented'), duration: Duration(microseconds: 100),));
-         }
-        },
+              listener: (context, state) {
+                if (state.wasIncremented == true) {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Counter value inremented'),
+                      duration: Duration(microseconds: 100)));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Counter value decremented'),
+                    duration: Duration(microseconds: 100),
+                  ));
+                }
+              },
               builder: (context, state) {
                 if (state.counterValue == 2) {
                   return Text(
                     'OHHH, an even ${state.counterValue.toString()}',
                     style: Theme.of(context).textTheme.headlineMedium,
                   );
-                }
-                else if (state.counterValue < 0) {
+                } else if (state.counterValue < 0) {
                   return Text(
                     'BRRRR, Negtive ${state.counterValue.toString()}',
                     style: Theme.of(context).textTheme.headlineMedium,
                   );
-                }
-               else if (state.counterValue == 5) {
+                } else if (state.counterValue == 5) {
                   return Text(
                     'DANG, a Five!!',
                     style: Theme.of(context).textTheme.headlineMedium,
@@ -63,6 +65,7 @@ class _SecondScreenState extends State<SecondScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
+                  heroTag: 'screen2Fab',
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).increment();
                   },
@@ -70,6 +73,7 @@ class _SecondScreenState extends State<SecondScreen> {
                   child: const Icon(Icons.add),
                 ),
                 FloatingActionButton(
+                  heroTag: 'screen2Fab2',
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).decrement();
                   },
