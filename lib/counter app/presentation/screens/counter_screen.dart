@@ -3,8 +3,6 @@ import 'package:bloc_practice/counter%20app/presentation/screens/second_screen.d
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../logic/cubit/counter_cubit.dart';
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
   final String title;
@@ -28,11 +26,11 @@ class _MyHomePageState extends State<MyHomePage> {
             BlocConsumer<CounterCubit, CounterState>(
               listener: (context, state) {
                 if (state.wasIncremented == true) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Counter value inremented'),
                       duration: Duration(microseconds: 100)));
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text('Counter value decremented'),
                     duration: Duration(microseconds: 100),
                   ));
@@ -61,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 );
               },
             ),
-            SizedBox(
+            const SizedBox(
               height: 43,
             ),
             Row(
@@ -88,9 +86,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => BlocProvider.value(
                           value: BlocProvider.of<CounterCubit>(context),
-                          child: SecondScreen(title: 'Second Screen'))));
+                          child: const SecondScreen(title: 'Second Screen'))));
                 },
-                child: Text('Second Screen')),
+                child: const Text('Second Screen')),
           ],
         ),
       ),
