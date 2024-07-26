@@ -1,4 +1,6 @@
+import 'package:bloc_practice/constants/enums.dart';
 import 'package:bloc_practice/counter%20app/logic/cubit/counter_cubit.dart';
+import 'package:bloc_practice/counter%20app/logic/cubit/internet_cubit.dart';
 import 'package:bloc_practice/counter%20app/presentation/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,40 +25,35 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            BlocConsumer<CounterCubit, CounterState>(
+            BlocConsumer<InternetCubit, InternetState>(
               listener: (context, state) {
-                if (state.wasIncremented == true) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Counter value inremented'),
-                      duration: Duration(microseconds: 100)));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Counter value decremented'),
-                    duration: Duration(microseconds: 100),
-                  ));
-                }
+                // if (state is InternetConnected && state.connectionType == ConnectionType.mobile) {
+                //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                //       content: Text('Counter value inremented'),
+                //       duration: Duration(microseconds: 100)));
+                // } else {
+                //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                //     content: Text('Counter value decremented'),
+                //     duration: Duration(microseconds: 100),
+                //   ));
+                // }
+               
               },
               builder: (context, state) {
-                if (state.counterValue == 2) {
+                if (state is InternetConnected &&
+                    state.connectionType == ConnectionType.mobile) {
                   return Text(
-                    'OHHH, an even ${state.counterValue.toString()}',
+                    'MObile',
                     style: Theme.of(context).textTheme.headlineMedium,
                   );
-                } else if (state.counterValue < 0) {
+                } else if (state is InternetConnected &&
+                    state.connectionType == ConnectionType.wifi) {
                   return Text(
-                    'BRRRR, Negtive ${state.counterValue.toString()}',
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  );
-                } else if (state.counterValue == 5) {
-                  return Text(
-                    'DANG, a Five!!',
+                    'WIFI',
                     style: Theme.of(context).textTheme.headlineMedium,
                   );
                 }
-                return Text(
-                  state.counterValue.toString(),
-                  style: Theme.of(context).textTheme.headlineMedium,
-                );
+                return Text('no internet');
               },
             ),
             const SizedBox(
@@ -66,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 FloatingActionButton(
-                heroTag: 'screen1Fab',
+                  heroTag: 'screen1Fab',
                   onPressed: () {
                     BlocProvider.of<CounterCubit>(context).increment();
                   },
@@ -85,10 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             MaterialButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => BlocProvider.value(
-                          value: BlocProvider.of<CounterCubit>(context),
-                          child: const SecondScreen(title: 'Second Screen'))));
+                  Navigator.pushNamed(context, '/second-screen');
                 },
                 child: const Text('Second Screen')),
           ],

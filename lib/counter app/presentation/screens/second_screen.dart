@@ -81,7 +81,12 @@ class _SecondScreenState extends State<SecondScreen> {
                   child: const Icon(Icons.remove),
                 ),
               ],
-            )
+            ),
+            MaterialButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/');
+                },
+                child: const Text('Counter Screen')),
           ],
         ),
       ),
