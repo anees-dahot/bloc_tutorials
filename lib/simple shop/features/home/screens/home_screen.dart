@@ -41,6 +41,7 @@ class _HomeState extends State<Home> {
           ],
         ),
         body: BlocConsumer<HomeBloc, HomeState>(
+          bloc: context.read<HomeBloc>(),
           listenWhen: (previous, current) => current is HomeActionState,
           buildWhen: (previous, current) => current is! HomeActionState,
           listener: (context, state) {
