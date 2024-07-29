@@ -1,4 +1,4 @@
-import 'package:bloc_practice/constants/enums.dart';
+import 'package:bloc_practice/counter%20app/constants/enums.dart';
 import 'package:bloc_practice/counter%20app/logic/cubit/counter_cubit.dart';
 import 'package:bloc_practice/counter%20app/logic/cubit/internet_cubit.dart';
 import 'package:bloc_practice/counter%20app/presentation/screens/second_screen.dart';
