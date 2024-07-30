@@ -28,6 +28,7 @@ class SwitchandSliderScreen extends StatelessWidget {
                 BlocBuilder<NotificationBloc, NotificationState>(
                   bloc: context.read<NotificationBloc>(),
                   builder: (context, state) {
+                    print('notification');
                     return Switch(
                       value: state.status,
                       onChanged: (value) {
@@ -43,6 +44,7 @@ class SwitchandSliderScreen extends StatelessWidget {
             ),
             BlocBuilder<OpacityBloc, OpacityState>(
               builder: (context, state) {
+                  print('opacity');
                 return Container(
                   height: 300,
                   color: Colors.red.withOpacity(state.opacity),
@@ -52,6 +54,7 @@ class SwitchandSliderScreen extends StatelessWidget {
             const SizedBox(height: 20),
             BlocBuilder<OpacityBloc, OpacityState>(
               builder: (context, state) {
+                  print('slider');
                 return Slider(
                   value: state.opacity,
                   onChanged: (newValue) {
