@@ -4,10 +4,12 @@ import 'package:bloc_practice/API%20with%20bloc/router/app_route.dart';
 import 'package:bloc_practice/image%20picker/screen/image_picker.dart';
 import 'package:bloc_practice/switch%20and%20slider/bloc/switch_and_slider_bloc.dart';
 import 'package:bloc_practice/switch%20and%20slider/screen/switch_slider_screen.dart';
+import 'package:bloc_practice/to%20do%20app/bloc/todo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'image picker/bloc/image_picker_bloc.dart';
+import 'to do app/screens/to_do_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,12 +36,16 @@ class MyApp extends StatelessWidget {
         BlocProvider<PickFromGalleryBloc>(
           create: (context) => PickFromGalleryBloc(),
         ),
+        BlocProvider<TodoBloc>(
+          create: (context) => TodoBloc(),
+        ),
+       
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Simple Shop',
         // onGenerateRoute: appRouter.onGenerateRoutes,
-        home: ImagePicker(),
+        home: ToDoScreen(),
       ),
     );
   }
