@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:bloc_practice/API%20with%20bloc/features/posts/bloc/posts_bloc.dart';
 import 'package:bloc_practice/API%20with%20bloc/router/app_route.dart';
+import 'package:bloc_practice/favourite%20app/bloc/favourite_bloc.dart';
+import 'package:bloc_practice/favourite%20app/repository/favourite_repository.dart';
+import 'package:bloc_practice/favourite%20app/screens/favourite_screen.dart';
 import 'package:bloc_practice/image%20picker/screen/image_picker.dart';
 import 'package:bloc_practice/switch%20and%20slider/bloc/switch_and_slider_bloc.dart';
 import 'package:bloc_practice/switch%20and%20slider/screen/switch_slider_screen.dart';
@@ -39,13 +42,19 @@ class MyApp extends StatelessWidget {
         BlocProvider<TodoBloc>(
           create: (context) => TodoBloc(),
         ),
+        BlocProvider<FavouriteBloc>(
+          create: (context) => FavouriteBloc(FavouriteRepository()),
+        ),
        
       ],
-      child: const MaterialApp(
+      child:  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Simple Shop',
+        theme: ThemeData(
+brightness: Brightness.dark
+        ),
         // onGenerateRoute: appRouter.onGenerateRoutes,
-        home: ToDoScreen(),
+        home:const FavouriteScreen(),
       ),
     );
   }
