@@ -13,6 +13,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   FavouriteRepository favouriteRepository;
   List<FavouriteItemsModel> favouriteItems = [];
   List<FavouriteItemsModel> temFavouriteItems = [];
+  List<FavouriteItemsModel> searchResult = [];
   FavouriteBloc(
     this.favouriteRepository,
   ) : super(FavouriteInitial()) {
@@ -21,6 +22,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     on<SelectItem>(selectItem);
     on<UnSelectItem>(unSelectItem);
     on<DeleteItem>(deleteItem);
+    on<SearchItem>(searchItem);
   }
 
   FutureOr<void> favouriteInitialEvent(
@@ -34,18 +36,17 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   FutureOr<void> makeItemFavourite(
       MakeItemFavourite event, Emitter<FavouriteState> emit) {
     event.itemsModel.isFavourite = !event.itemsModel.isFavourite;
-    int index = favouriteItems.indexWhere((element) => element.id == event.itemsModel.id);
-    if(event.itemsModel.isFavourite){
-      if(temFavouriteItems.contains(favouriteItems[index])){
+    int index = favouriteItems
+        .indexWhere((element) => element.id == event.itemsModel.id);
+    if (event.itemsModel.isFavourite) {
+      if (temFavouriteItems.contains(favouriteItems[index])) {
         temFavouriteItems.remove(favouriteItems[index]);
         temFavouriteItems.add(event.itemsModel);
-
       }
-    }else{
-       if(temFavouriteItems.contains(favouriteItems[index])){
+    } else {
+      if (temFavouriteItems.contains(favouriteItems[index])) {
         temFavouriteItems.remove(favouriteItems[index]);
         temFavouriteItems.add(event.itemsModel);
-
       }
     }
     emit(LoadingState());
@@ -72,5 +73,20 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
     temFavouriteItems.clear();
     emit(LoadingState());
     emit(DataLoadedState(items: favouriteItems, temItems: temFavouriteItems));
+  }
+
+  FutureOr<void> searchItem(SearchItem event, Emitter<FavouriteState> emit) {
+    final items = favouriteItems
+        .where((element) => element.id.toString() == event.searchQuery)
+        .toList();
+    if (event.searchQuery.isEmpty) {
+      emit(DataLoadedState(
+          items: favouriteItems, searchMessage: '', searchItems: []));
+    } else if (event.searchQuery.isNotEmpty && items.isEmpty) {
+      emit(DataLoadedState(
+          items: [], searchMessage: 'No Search Result!', searchItems: items));
+    } else if (event.searchQuery.isNotEmpty && items.isNotEmpty) {
+      emit(DataLoadedState(items: [], searchMessage: '', searchItems: items));
+    }
   }
 }

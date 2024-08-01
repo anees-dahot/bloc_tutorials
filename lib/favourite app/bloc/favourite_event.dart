@@ -32,3 +32,9 @@ class UnSelectItem extends FavouriteEvent {
 }
 
 class DeleteItem extends FavouriteEvent {}
+
+class SearchItem extends FavouriteEvent {
+  final String searchQuery;
+
+  SearchItem({required this.searchQuery});
+}

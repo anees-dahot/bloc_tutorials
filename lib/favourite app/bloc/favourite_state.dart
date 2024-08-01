@@ -15,9 +15,26 @@ class LoadingState extends FavouriteState {}
 class DataLoadedState extends FavouriteState {
   final List<FavouriteItemsModel> items;
   List<FavouriteItemsModel> temItems;
+  List<FavouriteItemsModel> searchItems;
+  final String searchMessage;
 
-  DataLoadedState({
-    this.temItems = const [],
-    required this.items,
-  });
+  DataLoadedState(
+      {this.temItems = const [], required this.items, this.searchMessage = '', this.searchItems =  const []});
+
+  DataLoadedState copyWith({
+    List<FavouriteItemsModel>? items,
+    List<FavouriteItemsModel>? temItems,
+    List<FavouriteItemsModel>? searchItem,
+    String? searchMessage,
+  }) {
+    return DataLoadedState(
+      items: items ?? this.items,
+      temItems: temItems ?? this.temItems,
+      searchItems: searchItems ?? this.searchItems,
+      searchMessage: searchMessage ?? this.searchMessage,
+    );
+  }
+
+  @override
+  List<Object> get props => [items, temItems, searchMessage, searchItems];
 }
