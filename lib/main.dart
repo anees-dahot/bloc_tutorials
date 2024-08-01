@@ -8,6 +8,7 @@ import 'package:bloc_practice/to%20do%20app/bloc/todo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'image picker/bloc/image_picker_bloc.dart';
+import 'login app/screens/login_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -45,11 +46,9 @@ class MyApp extends StatelessWidget {
       child:  MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Simple Shop',
-        theme: ThemeData(
-brightness: Brightness.dark
-        ),
+       
         // onGenerateRoute: appRouter.onGenerateRoutes,
-        home:const FavouriteScreen(),
+        home:const LoginScreen(),
       ),
     );
   }
